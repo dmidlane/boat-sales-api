@@ -1,0 +1,20 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/BoatSalesApi/.vs/BoatSalesApi/v17/.suo
+/BoatSalesApi/.vs/BoatSalesApi/config/applicationhost.config
+/BoatSalesApi/BoatSalesApi/bin/Debug/net6.0
+/BoatSalesApi/BoatSalesApi/obj
+/BoatSalesApi/BoatSalesApi/Properties/serviceDependencies.local.json
+/BoatSalesApi/BoatSalesApi/Properties/serviceDependencies.local.json.user
+/BoatSalesApi/BoatSalesApi/BoatSalesApi.csproj.user
+BoatSalesApi/.vs/BoatSalesApi/FileContentIndex/1143b712-5b12-48f3-8d90-ebdd4f700132.vsidx
+BoatSalesApi/.vs/BoatSalesApi/FileContentIndex/3780cff6-2cd4-4492-aa9e-7b81d3ef2395.vsidx
+BoatSalesApi/.vs/BoatSalesApi/FileContentIndex/be4382d3-066f-4172-b586-e662ce281a62.vsidx
+BoatSalesApi/.vs/BoatSalesApi/FileContentIndex/da299b0a-f823-488e-ab7a-ab54b8ffc92f.vsidx
+BoatSalesApi/.vs/BoatSalesApi/DesignTimeBuild/.dtbcache.v2
+BoatSalesApi/.vs/BoatSalesApi/FileContentIndex/read.lock
+BoatSalesApi/.vs/BoatSalesApi/v17/.futdcache.v2
+BoatSalesApi/.vs/ProjectEvaluation/boatsalesapi.metadata.v5
+BoatSalesApi/.vs/ProjectEvaluation/boatsalesapi.projects.v5
