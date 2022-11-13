@@ -11,6 +11,8 @@
             public const string GetAll = $"{BaseUrl}/boats";
             public const string Get = BaseUrl +"/boats/{boatId}:guid";
             public const string Create = $"{BaseUrl}/boats";
+            public const string Update = BaseUrl +"/boats/{boatId}:guid";
+            public const string Delete = BaseUrl +"/boats/{boatId}:guid";
 
         }
     }

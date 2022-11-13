@@ -32,14 +32,14 @@ namespace BoatSalesApi.Controllers.V1
         }
 
         [HttpPost(ApiRoutes.Boats.Create)]
-        public IActionResult Create([FromBody] CreateBoatRequest boatRequest)
+        public IActionResult Create([FromBody] CreateBoatRequest request)
         {
 
             // for easy testing
-            if (boatRequest.Id == Guid.Empty)
-                boatRequest.Id = Guid.NewGuid();
+            if (request.Id == Guid.Empty)
+                request.Id = Guid.NewGuid();
 
-            Boat boat = new() { Id = boatRequest.Id};
+            Boat boat = new() { Id = request.Id};
             
             _boatService.CreateBoat(boat);
             
@@ -63,5 +63,36 @@ namespace BoatSalesApi.Controllers.V1
             // stop returning datamodel
             return Ok(responseModel);
         }
+        [HttpPut(ApiRoutes.Boats.Update)]
+        public IActionResult Update([FromRoute]Guid boatId, [FromBody] UpdateBoatRequest request)
+        {
+            
+            if (request == null || request.Id == Guid.Empty)
+                return NotFound();
+
+            Boat boat = new(){
+                Id = request.Id,
+                Name = request.Name
+            };
+
+            if(_boatService.UpdateBoat(boat))
+                return Ok(boat); // TODO: response model needed
+
+            return NotFound();
+            
+        }
+
+        [HttpDelete(ApiRoutes.Boats.Delete)]
+        public IActionResult Delete([FromRoute] Guid boatId)
+        {
+            if (boatId == Guid.Empty)
+                return NotFound();
+
+            if (_boatService.DeleteBoat(boatId))
+                return NoContent();
+            
+            return NotFound();
+        }
     }
+
 }

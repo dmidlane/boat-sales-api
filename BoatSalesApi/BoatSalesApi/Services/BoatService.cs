@@ -17,18 +17,39 @@ public class BoatService : IBoatService
         }
         
     }
-    public Boat GetBoatById(Guid boatId)
-    {
-        return _boatData.SingleOrDefault(b => b.Id == boatId);
-    }
+    public Boat? GetBoatById(Guid boatId) => _boatData.SingleOrDefault(b => b.Id == boatId);
 
-    public List<Boat> GetBoats()
-    {
-        return _boatData;
-    }
+    public List<Boat>? GetBoats() => _boatData;
 
     public void CreateBoat(Boat boat)
     {
         _boatData.Add(boat);
     }
+
+    public bool UpdateBoat(Boat boat)
+    {
+       var boatToUpdate = _boatData.SingleOrDefault(b => b.Id == boat.Id);
+
+       if (boatToUpdate == null)
+            return false;
+
+        boatToUpdate.Name = boat.Name;
+        return true;
+    }
+
+    public bool DeleteBoat(Guid boatId)
+    {
+        if (boatId == Guid.Empty)
+            return false;
+
+        Boat? boat = GetBoatById(boatId);
+
+        if (boat == null)
+            return false;
+
+        _boatData.Remove(boat);
+
+        return true;
+    }
+
 }

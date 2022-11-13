@@ -1,9 +1,8 @@
-﻿namespace BoatSalesApi.Contracts.V1.Request
+namespace BoatSalesApi.Contracts.V1.Request
 {
-    public class CreateBoatRequest
+    public class UpdateBoatRequest
     {
         public Guid Id { get; set; }
-
         public string? Name { get; set; }
     }
 }
