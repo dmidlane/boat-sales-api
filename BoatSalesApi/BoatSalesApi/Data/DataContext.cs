@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using BoatSalesApi.Domain;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace BoatSalesApi.Data
@@ -9,5 +10,7 @@ namespace BoatSalesApi.Data
             : base(options)
         {
         }
+
+        public DbSet<Boat> Boats { get; set; }
     }
 }

@@ -1,14 +1,14 @@
-using BoatSalesApi.Domain.V1;
+using BoatSalesApi.Domain;
 
 namespace BoatSalesApi.Services
 {
     public interface IBoatService
     {
-        List<Boat>? GetBoats();
-        Boat? GetBoatById(Guid boatId);
-        void CreateBoat(Boat boat);
-        bool UpdateBoat(Boat boat);
-        bool DeleteBoat(Guid postId);
+        Task<List<Boat>?> GetBoatsAsync();
+        Task<Boat?> GetBoatByIdAsync(Guid boatId);
+        Task<bool> CreateBoatAsync(Boat boat);
+        Task<bool> UpdateBoatAsync(Boat boat);
+        Task<bool> DeleteBoatAsync(Guid postId);
 
     }
 }

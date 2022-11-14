@@ -1,55 +1,49 @@
 
-using BoatSalesApi.Domain.V1;
+using BoatSalesApi.Data;
+using BoatSalesApi.Domain;
+using Microsoft.EntityFrameworkCore;
 
 namespace BoatSalesApi.Services;
 
 public class BoatService : IBoatService
 {
-    private readonly  List<Boat> _boatData;
+    private readonly  DataContext _dataContext;
 
-    public BoatService()
+    public BoatService(DataContext dataContext)
     {
-        _boatData = new();
-        
-        for (int i = 0; i < 5; i++)
-        {
-            _boatData.Add(new Boat() { Id = Guid.NewGuid() });
-        }
+        _dataContext = dataContext;
         
     }
-    public Boat? GetBoatById(Guid boatId) => _boatData.SingleOrDefault(b => b.Id == boatId);
+    public async Task<Boat?> GetBoatByIdAsync(Guid boatId) => await _dataContext.Boats.SingleOrDefaultAsync(b => b.Id == boatId);
 
-    public List<Boat>? GetBoats() => _boatData;
+    public async Task<List<Boat>?> GetBoatsAsync() => await _dataContext.Boats.ToListAsync();
 
-    public void CreateBoat(Boat boat)
+    public async Task<bool> CreateBoatAsync(Boat boat)
     {
-        _boatData.Add(boat);
+        await _dataContext.Boats.AddAsync(boat);
+        int createdCount = await _dataContext.SaveChangesAsync();
+        return createdCount > 0;
     }
 
-    public bool UpdateBoat(Boat boat)
+    public async Task<bool> UpdateBoatAsync(Boat boat)
     {
-       var boatToUpdate = _boatData.SingleOrDefault(b => b.Id == boat.Id);
-
-       if (boatToUpdate == null)
-            return false;
-
-        boatToUpdate.Name = boat.Name;
-        return true;
+        _dataContext.Boats.Update(boat);
+        int updatedCount = await _dataContext.SaveChangesAsync();
+        return updatedCount > 0;
     }
 
-    public bool DeleteBoat(Guid boatId)
+    public async Task<bool> DeleteBoatAsync(Guid boatId)
     {
-        if (boatId == Guid.Empty)
+        if(boatId == Guid.Empty)
             return false;
 
-        Boat? boat = GetBoatById(boatId);
-
+        Boat? boat = await GetBoatByIdAsync(boatId);
         if (boat == null)
             return false;
 
-        _boatData.Remove(boat);
-
-        return true;
+        _dataContext.Boats.Remove(boat);
+        int deletedCount = await _dataContext.SaveChangesAsync();
+        return deletedCount > 0;
     }
 
 }
